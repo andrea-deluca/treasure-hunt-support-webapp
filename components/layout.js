@@ -1,11 +1,13 @@
 import styles from '../styles/layout.module.css'
+import Nav from './navbar'
 import Footer from './footer'
 
-export default function Layout({ main }) {
+export default function Layout({ children, navbar }) {
     return (
-        <div>
+        <div className={styles.container}>
+            {navbar ? <Nav /> : null}
             <main className={styles.main}>
-                {main}
+                {children}
             </main>
             <Footer />
         </div>

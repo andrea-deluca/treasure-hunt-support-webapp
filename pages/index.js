@@ -17,13 +17,14 @@ function LoginHead() {
 function LoginMain() {
   return (
     <>
-      <Col xs={{ span: 4 }}>
+      <Col xs={{ span: 4 }} className={"d-none d-lg-block"}>
         <Image src="/images/logo.png" alt="Consulta Giovanile di Lascari Logo" width={539} height={539} />
       </Col>
-      <Col xs={{ span: 2 }}>
+      <Col xs={{ span: 2 }} className={"d-none d-lg-block"}>
         <div className={styles.divider}>{''}</div>
       </Col>
-      <Col xs={{ span: 4 }}>
+      <Col xs={{ span: 10 }} lg={{ span: 4 }} className={styles.main_col}>
+        <Image className={"me-3 d-block d-lg-none"} src="/images/logo.png" alt="Consulta Giovanile di Lascari Logo" width={150} height={150} />
         <h1 className={styles.title}>Benvenuto alla<br /><span className={styles.title_span}>Treasure Hunt</span></h1>
         <Form>
           <Form.Group className="mb-4 mt-5" controlId="username">
@@ -45,9 +46,9 @@ function LoginMain() {
 
 export default function Login() {
   return (
-    <>
+    <Layout>
       <LoginHead />
-      <Layout main={LoginMain()} />
-    </>
+      <LoginMain />
+    </Layout>
   )
 }
