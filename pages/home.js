@@ -1,6 +1,9 @@
 import Head from "next/head";
+import Image from "next/image";
 import Layout from "../components/layout";
-import { Row, Col, Card } from 'react-bootstrap'
+import Divider from "../components/divider"
+import { Row, Col, Card, Button } from 'react-bootstrap'
+import styles from '../styles/home.module.css'
 
 function HomeHead() {
     return (
@@ -15,32 +18,39 @@ function HomeHead() {
 function HomeMain() {
     return (
         <>
-            <div className={"row gy-5"}>
-                <Card className={"mx-auto col-lg-4 col-10"}>
+            <Col xs={{ span: 10 }} lg={{ span: 4 }}>
+                <Card className={styles.card}>
+                    <Image variant="top" src="/svg/map.svg" width={200} height={200} />
                     <Card.Body>
-                        <Card.Title>Caccia al tesoro</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                        <Card.Text>
+                        <Card.Title className={styles.title}>Caccia al tesoro</Card.Title>
+                        <Card.Text className={styles.text}>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Card.Link href="#">Card Link</Card.Link>
-                        <Card.Link href="#">Another Link</Card.Link>
+                        <Button variant={"primary"}>
+                            Entra ora
+                        </Button>
                     </Card.Body>
                 </Card>
-                <Card className={"mx-auto col-lg-4 col-10"}>
+            </Col>
+            <Col xs={{ span: 2 }}>
+                <Divider />
+            </Col>
+            <Col xs={{ span: 10 }} lg={{ span: 4 }}>
+                <Card className={styles.card}>
+                    <Image variant="top" src="/svg/support.svg" width={200} height={200} />
                     <Card.Body>
-                        <Card.Title>Supporto</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-                        <Card.Text>
+                        <Card.Title className={styles.title}>Supporto</Card.Title>
+                        <Card.Text className={styles.text}>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text>
-                        <Card.Link href="#">Card Link</Card.Link>
-                        <Card.Link href="#">Another Link</Card.Link>
+                        <Button variant={"dark"}>
+                            Accedi al supporto
+                        </Button>
                     </Card.Body>
                 </Card>
-            </div>
+            </Col>
         </>
     );
 }

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout';
+import Divider from '../components/divider';
 import styles from '../styles/login.module.css'
 import { Col, Form, Button } from 'react-bootstrap';
 
@@ -21,7 +22,7 @@ function LoginMain() {
         <Image src="/images/logo.png" alt="Consulta Giovanile di Lascari Logo" width={539} height={539} />
       </Col>
       <Col xs={{ span: 2 }} className={"d-none d-lg-block"}>
-        <div className={styles.divider}>{''}</div>
+        <Divider />
       </Col>
       <Col xs={{ span: 10 }} lg={{ span: 4 }} className={styles.main_col}>
         <Image className={"me-3 d-block d-lg-none"} src="/images/logo.png" alt="Consulta Giovanile di Lascari Logo" width={150} height={150} />

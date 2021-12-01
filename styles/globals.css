@@ -16,26 +16,30 @@ a {
   box-sizing: border-box;
 }
 
-.form-label{
+.form-label {
   font-weight: 200 !important;
 }
 
-.form-control{
+.form-control {
   background-color: #fafafa !important;
   border-radius: 10px !important;
   padding: 8px !important;
 }
 
-.btn{
+.btn {
   border-radius: 10px !important;
   font-weight: 600 !important;
 }
 
-.btn-primary{
+.btn-primary {
   background-color: rgb(159, 46, 23) !important;
   border-color: rgb(99, 37, 27) !important;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: rgb(99, 37, 27) !important;
+}
+
+.offcanvas-title{
+  font-weight: 700 !important;
 }
