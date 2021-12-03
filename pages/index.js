@@ -1,55 +1,75 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Layout from '../components/layout';
-import Divider from '../components/divider';
-import styles from '../styles/login.module.css'
-import { Col, Form, Button } from 'react-bootstrap';
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import Layout from "../components/layout";
+import Divider from "../components/divider"
+import { Row, Col, Card, Button } from 'react-bootstrap'
+import styles from '../styles/home.module.css'
+import support from '../public/svg/support.svg'
+import map from '../public/svg/map.svg'
+import AuthRoute from "../components/authRoute";
 
-function LoginHead() {
+function HomeHead() {
   return (
     <Head>
-      <title>Caccia al tesoro | Login</title>
+      <title>Caccia al tesoro | Home</title>
       <meta name="description" content="Webapp di supporto per la caccia al tesoro organizzata dalla Consulta Giovanile di Lascari" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
   );
 }
 
-function LoginMain() {
+function HomeMain() {
   return (
     <>
-      <Col xs={{ span: 4 }} className={"d-none d-lg-block"}>
-        <Image src="/images/logo.png" alt="Consulta Giovanile di Lascari Logo" width={539} height={539} />
-      </Col>
-      <Col xs={{ span: 2 }} className={"d-none d-lg-block"}>
-        <Divider />
-      </Col>
-      <Col xs={{ span: 10 }} lg={{ span: 4 }} className={styles.main_col}>
-        <Image className={"me-3 d-block d-lg-none"} src="/images/logo.png" alt="Consulta Giovanile di Lascari Logo" width={150} height={150} />
-        <h1 className={styles.title}>Benvenuto alla<br /><span className={styles.title_span}>Treasure Hunt</span></h1>
-        <Form>
-          <Form.Group className="mb-4 mt-5" controlId="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="email" placeholder="Username" name="username" />
-          </Form.Group>
-          <Form.Group className="mb-4" controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="password" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Accedi
-          </Button>
-        </Form>
-      </Col>
+      <Row className={"justify-content-center"}>
+        <Col xs={{ span: 10 }} lg={{ span: 4 }}>
+          <Card className={styles.card}>
+            <Image variant="top" src={map} width={200} height={200} />
+            <Card.Body>
+              <Card.Title className={styles.title}>Caccia al tesoro</Card.Title>
+              <Card.Text className={styles.text}>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Button variant={"primary"}>
+                Entra ora
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={{ span: 2 }} className={"d-lg-block d-none"}>
+          <Divider />
+        </Col>
+        <Col xs={{ span: 10 }} lg={{ span: 4 }}>
+          <Card className={styles.card}>
+            <Image variant="top" src={support} width={200} height={200} />
+            <Card.Body>
+              <Card.Title className={styles.title}>Supporto</Card.Title>
+              <Card.Text className={styles.text}>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Link href={"/support"}>
+                <Button variant={"dark"}>
+                  Accedi al supporto
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }
 
-export default function Login() {
+export default function Home() {
   return (
-    <Layout>
-      <LoginHead />
-      <LoginMain />
-    </Layout>
-  )
+    <AuthRoute>
+      <Layout navbar>
+        <HomeHead />
+        <HomeMain />
+      </Layout>
+    </AuthRoute>
+  );
 }

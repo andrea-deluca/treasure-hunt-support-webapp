@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import Link from 'next/link'
+import Image from 'next/image';
 import { Container, Navbar, Offcanvas } from 'react-bootstrap'
 import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine } from 'react-icons/ri'
 import styles from '../styles/navbar.module.css'
+import logo from '../public/images/logo.png'
+import { signOut } from 'firebase/auth';
+import { auth } from '../lib/firebase';
 
 function NavMenu() {
     const [show, setShow] = useState(false);
+
+    const singOutHandler = async () => {
+        await signOut(auth)
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -33,12 +41,10 @@ function NavMenu() {
                         </Link>
                     </ul>
                     <ul className={styles.menuList}>
-                        <Link href={"/home"}>
-                            <li className={"d-flex align-items-center"}>
-                                <RiLoginCircleLine className={"me-3"} />
-                                Esci
-                            </li>
-                        </Link>
+                        <li className={"d-flex align-items-center"} onClick={singOutHandler}>
+                            <RiLoginCircleLine className={"me-3"} />
+                            Esci
+                        </li>
                     </ul>
                 </Offcanvas.Body>
             </Offcanvas>
@@ -53,8 +59,8 @@ export default function Nav() {
             <Navbar bg="light">
                 <Container>
                     <Navbar.Brand href="#home">
-                        <img
-                            src="/images/logo.png"
+                        <Image
+                            src={logo}
                             width="40"
                             height="40"
                             className="d-inline-block align-top"

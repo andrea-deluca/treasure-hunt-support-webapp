@@ -32,14 +32,14 @@ a {
 }
 
 .btn-primary {
-  background-color: rgb(159, 46, 23) !important;
-  border-color: rgb(99, 37, 27) !important;
+  background-color: #9f2e17 !important;
+  border-color: #63251b !important;
 }
 
 .btn-primary:hover {
-  background-color: rgb(99, 37, 27) !important;
+  background-color: #63251b !important;
 }
 
-.offcanvas-title{
+.offcanvas-title {
   font-weight: 700 !important;
 }
