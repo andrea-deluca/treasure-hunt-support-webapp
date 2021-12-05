@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from '../lib/firebase'
+import { auth, database } from '../lib/firebase'
 import { onAuthStateChanged } from "firebase/auth";
 import Loading from "../components/loading";
+import { ref, get, child } from "firebase/database";
 
 export const AuthContext = createContext();
 
@@ -11,8 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState({
         userProviderId: "",
         userId: "",
-        userName: "",
         userEmail: "",
+        userType: ""
     })
 
     useEffect(() => {
@@ -21,11 +22,19 @@ export const AuthProvider = ({ children }) => {
                 const requiredData = {
                     userProviderId: user.providerData[0].providerId,
                     userId: user.uid,
-                    userName: user.displayName,
+                    userEmail: user.email,
                 }
-
-                setUserData(requiredData)
+                // setUserData(requiredData)
                 setCurrentUser(user)
+
+                const dbRef = ref(database)
+                get(child(dbRef, `users/${user.uid}`)).then((snapshot) => {
+                    setUserData({
+                        ...requiredData,
+                        userName: snapshot.val().name,
+                        userType: snapshot.val().type
+                    })
+                })
             } else {
                 setCurrentUser(null)
             }

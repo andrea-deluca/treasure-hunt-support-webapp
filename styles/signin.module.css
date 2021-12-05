@@ -1,0 +1,23 @@
+.title {
+    margin: 0;
+    line-height: 1;
+    font-size: 3rem;
+    font-weight: 200;
+    color: rgb(158, 46, 23);
+  }
+  
+  .title_span {
+    font-size: 4rem;
+    font-weight: 800;
+  }
+
+  .login{
+    color: #b0b0b0;
+    font-weight: 300;
+  }
+  
+  .login:hover{
+    color: rgb(158, 46, 23);
+    cursor: pointer;
+  }
+  

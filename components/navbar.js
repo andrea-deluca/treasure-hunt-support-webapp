@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Link from 'next/link'
 import Image from 'next/image';
 import { Container, Navbar, Offcanvas } from 'react-bootstrap'
@@ -7,6 +7,7 @@ import styles from '../styles/navbar.module.css'
 import logo from '../public/images/logo.png'
 import { signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase';
+import { AuthContext } from '../context/AuthContext';
 
 function NavMenu() {
     const [show, setShow] = useState(false);
@@ -54,19 +55,23 @@ function NavMenu() {
 
 
 export default function Nav() {
+    const { userData } = useContext(AuthContext)
     return (
         <nav className={styles.navbar}>
             <Navbar bg="light">
                 <Container>
                     <Navbar.Brand href="#home">
-                        <Image
-                            src={logo}
-                            width="40"
-                            height="40"
-                            className="d-inline-block align-top"
-                            alt="React Bootstrap logo"
-                        />
+                        <Link href={"/"}>
+                            <Image
+                                src={logo}
+                                width="40"
+                                height="40"
+                                className="d-inline-block align-top"
+                                alt="React Bootstrap logo"
+                            />
+                        </Link>
                     </Navbar.Brand>
+                    <span>Team: <strong>{userData.userName}</strong></span>
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
                             <NavMenu />

@@ -8,18 +8,24 @@
 }
 
 .chatsBox {
+    color: black !important;
     display: flex;
     align-items: center;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 15px !important;
 }
 
 .chatsBox:hover {
-    background-color: #f8f8f8;
+    color: black !important;
+    background-color: #f8f8f8 !important;
 }
 
 .chatBox {
-    min-height: 30vh;
+    align-self: flex-end !important;
+    display: flex;
+    height: 50vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 .messageReceivedContainer {
@@ -52,4 +58,8 @@
 .chatMessageText {
     margin: 0;
     display: inline;
+}
+
+.navItem {
+    cursor: pointer !important;
 }

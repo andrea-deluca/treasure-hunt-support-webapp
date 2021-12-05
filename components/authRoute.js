@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 
-const AuthRoute = ({ children }) => {
+const AuthRoute = ({ children, onlyAdmin }) => {
     const { currentUser } = useContext(AuthContext)
     const router = useRouter()
 

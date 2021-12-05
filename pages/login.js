@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import Layout from '../components/layout';
 import Divider from '../components/divider';
 import styles from '../styles/login.module.css'
@@ -26,6 +27,11 @@ function LoginMain() {
     const router = useRouter()
     const { currentUser } = useContext(AuthContext)
 
+    if (currentUser) {
+        router.push('/')
+        return <Loading />
+    }
+
     const loginHandler = useCallback(
         async (event) => {
             event.preventDefault()
@@ -38,11 +44,6 @@ function LoginMain() {
                 alert(error)
             }
         }, [router])
-
-    if (currentUser) {
-        router.push('/')
-        return <Loading />
-    }
 
     return (
         <>
@@ -64,6 +65,9 @@ function LoginMain() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" name="password" />
                     </Form.Group>
+                    <Link href={"/sign-in"}>
+                        <p className={styles.signIn}>Non hai un account? Registrati</p>
+                    </Link>
                     <Button variant="primary" type="submit">
                         Accedi
                     </Button>

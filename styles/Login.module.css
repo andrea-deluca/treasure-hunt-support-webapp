@@ -16,3 +16,13 @@
   font-size: 4rem;
   font-weight: 800;
 }
+
+.signIn{
+  color: #b0b0b0;
+  font-weight: 300;
+}
+
+.signIn:hover{
+  color: rgb(158, 46, 23);
+  cursor: pointer;
+}
