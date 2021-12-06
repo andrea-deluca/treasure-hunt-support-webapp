@@ -9,7 +9,6 @@ import styles from '../styles/home.module.css'
 import support from '../public/svg/support.svg'
 import map from '../public/svg/map.svg'
 import AuthRoute from "../components/authRoute";
-import { AuthContext } from "../context/AuthContext";
 
 function HomeHead() {
   return (
@@ -22,8 +21,6 @@ function HomeHead() {
 }
 
 function HomeMain() {
-  const { userData } = useContext(AuthContext)
-
   return (
     <>
       <Row className={"justify-content-center"}>

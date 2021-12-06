@@ -21,10 +21,12 @@
 }
 
 .chatBox {
+    justify-content: flex-end;
     align-self: flex-end !important;
     display: flex;
-    height: 50vh;
-    overflow-y: scroll;
+    flex-direction: column;
+    height: 60vh;
+    overflow-y: scroll !important;
     scroll-behavior: smooth;
 }
 

@@ -41,20 +41,15 @@ export default function SignIn() {
                     updates[`users/${user.user.uid}/`] = userData
                     updates[`chats/${chatKey}`] = {
                         name: initSupportData.chatName,
-                        lastMessage: initSupportData.message
-                    }
-                    updates[`members/${chatKey}`] = {
-                        support: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
-                        team: user.user.uid
-                    }
-                    update(dbRef, updates)
-                    const messageKey = push(child(dbRef, `messages/${chatKey}/`)).key
-                    updates = {}
-                    updates[`messages/${chatKey}/${messageKey}`] = {
-                        sender: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
-                        dest: user.user.uid,
-                        text: initSupportData.message,
-                        timestamp: Date.now()
+                        lastMessage: initSupportData.message,
+                        supportId: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
+                        memberId: user.user.uid,
+                        messages: [{
+                            sender: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
+                            dest: user.user.uid,
+                            text: initSupportData.message,
+                            timestamp: Date.now()
+                        }]
                     }
                     update(dbRef, updates)
                 })

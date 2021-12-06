@@ -65,7 +65,7 @@ function LoginMain() {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" name="password" />
                     </Form.Group>
-                    <Link href={"/sign-in"}>
+                    <Link href={"/signin"}>
                         <p className={styles.signIn}>Non hai un account? Registrati</p>
                     </Link>
                     <Button variant="primary" type="submit">

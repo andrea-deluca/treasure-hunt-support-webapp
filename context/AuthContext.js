@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
                     userId: user.uid,
                     userEmail: user.email,
                 }
-                // setUserData(requiredData)
+                setUserData(requiredData)
                 setCurrentUser(user)
 
                 const dbRef = ref(database)
