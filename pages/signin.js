@@ -44,6 +44,7 @@ export default function SignIn() {
                         lastMessage: initSupportData.message,
                         supportId: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
                         memberId: user.user.uid,
+                        memberName: name.value,
                         messages: [{
                             sender: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
                             dest: user.user.uid,

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import Link from 'next/link'
 import Image from 'next/image';
 import { Container, Navbar, Offcanvas } from 'react-bootstrap'
-import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine } from 'react-icons/ri'
+import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine, RiCustomerService2Fill, RiTerminalBoxFill } from 'react-icons/ri'
 import styles from '../styles/navbar.module.css'
 import logo from '../public/images/logo.png'
 import { signOut } from 'firebase/auth';
@@ -11,6 +11,7 @@ import { AuthContext } from '../context/AuthContext';
 
 function NavMenu() {
     const [show, setShow] = useState(false);
+    const { userData } = useContext(AuthContext)
 
     const singOutHandler = async () => {
         await signOut(auth)
@@ -28,20 +29,32 @@ function NavMenu() {
                 </Offcanvas.Header>
                 <Offcanvas.Body className={"d-flex flex-column justify-content-between align--start"}>
                     <ul className={styles.menuList}>
-                        <Link href={"/home"}>
+                        <Link href={"/"}>
                             <li className={"d-flex align-items-center"}>
                                 <RiHome3Fill className={"me-3"} />
                                 Home
                             </li>
                         </Link>
-                        <Link href={"/home"}>
+                        <Link href={"/"}>
                             <li className={"d-flex align-items-center"}>
                                 <RiMap2Fill className={"me-3"} />
                                 Caccia al tesoro
                             </li>
                         </Link>
+                        {userData.userType === "admin" && <Link href={"/admin"}>
+                            <li className={"d-flex align-items-center"}>
+                                <RiTerminalBoxFill className={"me-3"} />
+                                Funzionalità admin
+                            </li>
+                        </Link>}
                     </ul>
                     <ul className={styles.menuList}>
+                        <Link href={"/support"}>
+                            <li className={"d-flex align-items-center"}>
+                                <RiCustomerService2Fill className={"me-3"} />
+                                Supporto
+                            </li>
+                        </Link>
                         <li className={"d-flex align-items-center"} onClick={singOutHandler}>
                             <RiLoginCircleLine className={"me-3"} />
                             Esci

@@ -9,6 +9,7 @@ import styles from '../styles/home.module.css'
 import support from '../public/svg/support.svg'
 import map from '../public/svg/map.svg'
 import AuthRoute from "../components/authRoute";
+import { RiMap2Fill, RiCustomerService2Fill } from 'react-icons/ri'
 
 function HomeHead() {
   return (
@@ -34,6 +35,7 @@ function HomeMain() {
                 the card's content.
               </Card.Text>
               <Button variant={"primary"}>
+                <RiMap2Fill className={"me-2"} />
                 Entra ora
               </Button>
             </Card.Body>
@@ -53,6 +55,7 @@ function HomeMain() {
               </Card.Text>
               <Link href={"/support"}>
                 <Button variant={"dark"}>
+                  <RiCustomerService2Fill className={"me-2"} />
                   Accedi al supporto
                 </Button>
               </Link>
