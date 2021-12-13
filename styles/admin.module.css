@@ -1,5 +1,18 @@
-.navItem {
+.item {
     margin-top: 10px;
-    margin-left: 10px;
     cursor: pointer !important;
+    border-radius: 15px !important;
+}
+
+.item:hover {
+    color: black !important;
+    background-color: #f8f8f8 !important;
+}
+
+.link {
+    padding: 20px;
+}
+
+.link:hover{
+    color: black !important;
 }

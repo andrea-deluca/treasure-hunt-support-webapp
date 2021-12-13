@@ -1,79 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Layout from "../components/layout";
-import { Col, Tab, Nav, Form, Button } from "react-bootstrap";
+import { Col, Tab, Nav } from "react-bootstrap";
 import styles from '../styles/admin.module.css'
-import { auth, database } from "../lib/firebase";
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { ref, set, update, push, child } from 'firebase/database'
-import AlertModal from "../components/modal";
 import AuthRoute from "../components/authRoute";
 import { AuthContext } from "../context/AuthContext";
 import AccessDenied from "../components/accessDenied";
+import { RiUserAddFill, RiNotification2Fill } from 'react-icons/ri'
+import AddUserForm from "../components/addUserForm";
+import SendNotificationForm from "../components/sendNotificationForm";
 
 export default function AdminPanel() {
-    const { currentUser, userData } = useContext(AuthContext)
-    const [modal, setModal] = useState({
-        show: false,
-        type: null,
-    })
-
-    console.log(userData)
-
-    const handleAddTeam = async (event) => {
-        event.preventDefault()
-
-        const dbref = ref(database)
-        const chatKey = push(child(dbref, "chats/")).key
-        const updates = {}
-        updates[`chats/${chatKey}`] = {
-            name: "Supporto della Consulta",
-            lastMessage: "Benvenuto"
-        }
-        updates[`members/${chatKey}`] = {
-            support: userData.userId,
-            team: "idTeam"
-        }
-        update(dbref, updates)
-        const messageKey = push(child(dbref, `messages/${chatKey}/`)).key
-        updates = {}
-        updates[`messages/${chatKey}/${messageKey}`] = {
-            sender: userData.userId,
-            dest: "idTeam",
-            text: "Benvenuto",
-            timestamp: Date.now()
-        }
-        update(dbref, updates)
-
-
-
-
-
-
-        // const { name, username, password } = event.target.elements
-        // try {
-        //     await createUserWithEmailAndPassword(auth, username.value, password.value)
-        //         .then((user) => {
-        //             const data = {
-        //                 name: name.value,
-        //                 type: "user"
-        //             }
-        //             const dbRef = ref(database, "users/" + user.user.uid)
-        //             set(dbRef, data).then(() => {
-        //                 setModal({ show: true, type: "success" })
-        //                 name.value = ''
-        //                 username.value = ''
-        //                 password.value = ''
-        //             }).catch(error => {
-        //                 setModal({ ...modal, show: true, type: "error" })
-        //             })
-        //         })
-        //         .catch(error => {
-        //             setModal({ ...modal, show: true, type: "error" })
-        //         })
-        // } catch (error) {
-        //     setModal({ ...modal, show: true, type: "error" })
-        // }
-    }
+    const { userData } = useContext(AuthContext)
 
     if (userData.userType === "user") {
         return <AccessDenied />
@@ -81,41 +18,29 @@ export default function AdminPanel() {
         return (
             <AuthRoute>
                 <Layout navbar>
-                    <AlertModal type={modal.type} show={modal.show} onHide={() => setModal({ show: false })} />
-                    <Tab.Container id="left-tabs-example" defaultActiveKey="addTeam">
+                    <Tab.Container id="left-tab" defaultActiveKey="createUser">
                         <Col xs={{ span: 3 }}>
                             <Nav variant="pills" className="flex-column">
-                                <Nav.Item className={styles.navItem}>
-                                    <Nav.Link eventKey="addTeam">Aggiungi team</Nav.Link>
+                                <Nav.Item className={styles.item}>
+                                    <Nav.Link className={styles.link} eventKey="createUser">
+                                        <RiUserAddFill className={"me-3"} />Aggiungi team
+                                    </Nav.Link>
                                 </Nav.Item>
-                                <Nav.Item className={styles.navItem}>
-                                    <Nav.Link eventKey="second">Gestione caccia al tesoro</Nav.Link>
+                                <Nav.Item className={styles.item}>
+                                    <Nav.Link className={styles.link} eventKey="sendNotification">
+                                        <RiNotification2Fill className={"me-3"} />Invia notifiche</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>
                         <Col xs={{ span: 6, offset: 1 }}>
                             <Tab.Content>
-                                <Tab.Pane eventKey="addTeam">
-                                    <Form onSubmit={handleAddTeam}>
-                                        <Form.Group className="mb-4" controlId="name">
-                                            <Form.Label>Nome</Form.Label>
-                                            <Form.Control type="text" placeholder="Nome" name="name" />
-                                        </Form.Group>
-                                        <Form.Group className="mb-4" controlId="username">
-                                            <Form.Label>Email</Form.Label>
-                                            <Form.Control type="email" placeholder="Email" name="username" />
-                                        </Form.Group>
-                                        <Form.Group className="mb-4" controlId="password">
-                                            <Form.Label>Password</Form.Label>
-                                            <Form.Control type="password" placeholder="Password" name="password" />
-                                        </Form.Group>
-                                        <Button variant="primary" type="submit">
-                                            Aggiungi
-                                        </Button>
-                                    </Form>
+                                <Tab.Pane eventKey="createUser">
+                                    <h3 className={"mb-5 fw-bold"}>Aggiungi una nuova squadra</h3>
+                                    <AddUserForm />
                                 </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    Test 2
+                                <Tab.Pane eventKey="sendNotification">
+                                    <h3 className={"mb-5 fw-bold"}>Invia notifiche</h3>
+                                    <SendNotificationForm />
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

@@ -50,11 +50,8 @@ a {
   font-weight: 500 !important;
 }
 
-.nav-link:hover{
-  color: #9f2e17 !important;
-}
-
 .nav-link.active{
   background-color: #f8f8f8 !important;
   color: black !important;
+  border-radius: 15px !important;
 }

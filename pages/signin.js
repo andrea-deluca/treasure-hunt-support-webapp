@@ -41,7 +41,6 @@ export default function SignIn() {
                     updates[`users/${user.user.uid}/`] = userData
                     updates[`chats/${chatKey}`] = {
                         name: initSupportData.chatName,
-                        lastMessage: initSupportData.message,
                         supportId: "0SZxA5aEhvf3YR23awtaGZxD4rg2",
                         memberId: user.user.uid,
                         memberName: name.value,

@@ -2,12 +2,13 @@ import { useState, useContext } from 'react';
 import Link from 'next/link'
 import Image from 'next/image';
 import { Container, Navbar, Offcanvas } from 'react-bootstrap'
-import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine, RiCustomerService2Fill, RiTerminalBoxFill } from 'react-icons/ri'
+import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine, RiCustomerService2Fill, RiTerminalBoxFill, RiNotification3Line } from 'react-icons/ri'
 import styles from '../styles/navbar.module.css'
 import logo from '../public/images/logo.png'
 import { signOut } from 'firebase/auth';
 import { auth } from '../lib/firebase';
 import { AuthContext } from '../context/AuthContext';
+import NotificationCenter from './notificationCenter';
 
 function NavMenu() {
     const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ function NavMenu() {
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Menu</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body className={"d-flex flex-column justify-content-between align--start"}>
+                <Offcanvas.Body className={"d-flex flex-column justify-content-between align-start"}>
                     <ul className={styles.menuList}>
                         <Link href={"/"}>
                             <li className={"d-flex align-items-center"}>
@@ -69,6 +70,7 @@ function NavMenu() {
 
 export default function Nav() {
     const { userData } = useContext(AuthContext)
+
     return (
         <nav className={styles.navbar}>
             <Navbar bg="light">
@@ -86,6 +88,9 @@ export default function Nav() {
                     </Navbar.Brand>
                     <span>Team: <strong>{userData.userName}</strong></span>
                     <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text className={"me-5"}>
+                            <NotificationCenter/>
+                        </Navbar.Text>
                         <Navbar.Text>
                             <NavMenu />
                         </Navbar.Text>

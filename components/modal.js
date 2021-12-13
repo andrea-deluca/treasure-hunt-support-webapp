@@ -7,6 +7,9 @@ function Error(props) {
                 <Modal.Title className={"text-danger"}>Oops! Qualcosa è andato storto...</Modal.Title>
             </Modal.Header>
             <Modal.Body>Mi dispiace... non è stato possibile completare l'operazione.</Modal.Body>
+            <Modal.Body className={"text-danger"}><strong>{props.code}</strong>
+                <br />{props.message}
+            </Modal.Body>
             <Modal.Footer>
                 <Button variant="danger" onClick={props.onHide}>
                     Chiudi
@@ -34,7 +37,7 @@ function Success(props) {
 
 export default function AlertModal(props) {
     if (props.type === "error") {
-        return <Error show={props.show} onHide={props.onHide} />
+        return <Error show={props.show} onHide={props.onHide} message={props.message} code={props.code} />
     } else {
         return <Success show={props.show} onHide={props.onHide} />
     }
