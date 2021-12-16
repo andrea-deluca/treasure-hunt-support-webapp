@@ -19,7 +19,7 @@ export default function Support() {
 
     useEffect(async () => {
         const dbRef = ref(database, 'chats/')
-        await onValue(dbRef, (snapshot) => {
+        onValue(dbRef, (snapshot) => {
             const chats = []
             snapshot.forEach(snap => {
                 if (userData.userId === snap.val().memberId || userData.userId === snap.val().supportId) {
@@ -35,7 +35,7 @@ export default function Support() {
             setUserChats(chats)
         })
     }, [])
-
+    
     const sendHandle = (e) => {
         e.preventDefault()
         const message = {
@@ -55,10 +55,10 @@ export default function Support() {
             }
         }
         const dbRef = ref(database, `chats/${currentChat.key}/messages`)
-        set(child(dbRef, `${currentChat.messages.length}`), message)
+        set(child(dbRef, `${userChats[currentChat.index].messages.length}`), message)
         const updateMessages = currentChat.messages
         updateMessages.push(message)
-        // setCurrentChat({...currentChat, messages: updateMessages})
+        // setCurrentChat({ ...currentChat, messages: updateMessages })
         setNewMessage("")
     }
 
@@ -70,10 +70,10 @@ export default function Support() {
                         <Col xs={{ span: 10, offset: 1 }} lg={{ span: 3 }} className={"align-self-start"}>
                             <Nav variant="pills" className="flex-column">
                                 <h3 className={"fw-bold ps-4 mb-4"}>Le tue chat</h3>
-                                {userChats.map(chat => {
+                                {userChats.map((chat, index) => {
                                     return (
                                         <Link href={`#${chat.messages.length - 1}`}>
-                                            <Nav.Item className={styles.navItem} onClick={() => { setCurrentChat(chat) }}>
+                                            <Nav.Item className={styles.navItem} onClick={() => { setCurrentChat({...chat, index: index})}}>
                                                 <Nav.Link className={styles.chatsBox} eventKey={chat.key}>
                                                     <Image src={logo} alt={"Logo consulta giovanile di Lascari"} width={48} height={48} className={styles.chatPicture} />
                                                     <div className={"ms-3"}>

@@ -27,8 +27,6 @@
     display: flex;
     flex-direction: column;
     height: 60vh;
-    overflow-y: scroll !important;
-    scroll-behavior: smooth;
 }
 
 .messageReceivedContainer {

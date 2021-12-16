@@ -5,14 +5,14 @@ import { RiNotification3Fill } from 'react-icons/ri'
 import styles from '../styles/notification.module.css'
 import { AuthContext } from '../context/AuthContext'
 import { database } from "../lib/firebase";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, remove } from "firebase/database";
 import useSound from "use-sound";
 
 export default function NotificationCenter() {
     const { userData } = useContext(AuthContext)
     const [show, setShow] = useState(false);
     const [notifications, setNotifications] = useState(null)
-    const [notify] = useSound("/audio/notify.mp3", { soundEnabled: true })
+    const [notify] = useSound("/audio/notify.mp3")
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -22,12 +22,21 @@ export default function NotificationCenter() {
         onValue(dbRef, (snapshot) => {
             const notificationsArray = []
             snapshot.forEach(snap => {
-                notificationsArray.push(snap.exportVal())
+                notificationsArray.push({...snap.exportVal(), key: snap.key})
             })
             setNotifications(notificationsArray)
-            notify()
+            if (notificationsArray.length) {
+                notify()
+            }
         })
-    }, [])
+    }, [notify])
+
+    const deleteHandler = (e) => {
+        e.preventDefault()
+        const key = e.target.id
+        const dbRef = ref(database, `notifications/${userData.userId}/${key}`)
+        remove(dbRef)
+    }
 
     return (
         <>
@@ -41,21 +50,24 @@ export default function NotificationCenter() {
                 </Offcanvas.Header>
                 <Offcanvas.Body className={"d-flex flex-column justify-content-between"}>
                     <ul className={"p-0"}>
-                        {notifications && notifications.map(notification => {
+                        {(notifications && notifications.length !== 0) ? notifications.map(notification => {
                             return (
                                 <li className={"d-flex mb-3"}>
                                     <div className={styles.notificationBox}>
                                         <h6 className={styles.notificationTitle}>{notification.title}</h6>
                                         <p className={styles.notificationText}>{notification.message}</p>
                                         <Link href={"/"}>
-                                            <Button variant={"secondary"}>
+                                            <Button variant={"primary"}>
                                                 Portami lì
                                             </Button>
                                         </Link>
+                                        <Button id={notification.key} className={"ms-3"} variant={"light"} onClick={deleteHandler}>
+                                            Elimina
+                                        </Button>
                                     </div>
                                 </li>
-                            );
-                        })}
+                            )
+                        }) : <p className={"text-muted"}>Nessuna notifica</p>}
                     </ul>
                 </Offcanvas.Body>
             </Offcanvas>
