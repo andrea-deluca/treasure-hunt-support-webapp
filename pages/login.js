@@ -32,18 +32,30 @@ function LoginMain() {
         return <Loading />
     }
 
-    const loginHandler = useCallback(
-        async (event) => {
-            event.preventDefault()
-            const { username, password } = event.target.elements
-            try {
-                await signInWithEmailAndPassword(auth, username.value, password.value)
-                router.push('/')
-            } catch (error) {
-                console.log(error)
-                alert(error)
-            }
-        }, [router])
+    const loginHandler = async (e) => {
+        e.preventDefault()
+        const { username, password } = e.target.elements
+        try {
+            await signInWithEmailAndPassword(auth, username.value, password.value)
+            router.push('/')
+        } catch (error) {
+            console.log(error)
+            alert(error)
+        }
+    }
+
+    // const loginHandler = useCallback(
+    //     async (event) => {
+    //         event.preventDefault()
+    //         const { username, password } = event.target.elements
+    //         try {
+    //             await signInWithEmailAndPassword(auth, username.value, password.value)
+    //             router.push('/')
+    //         } catch (error) {
+    //             console.log(error)
+    //             alert(error)
+    //         }
+    //     }, [router])
 
     return (
         <>
