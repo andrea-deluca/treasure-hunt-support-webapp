@@ -94,7 +94,7 @@ export default function Support() {
                                         <Tab.Pane key={chat.key} eventKey={chat.key}>
                                             {chat.messages.map((message, index) => {
                                                 return (
-                                                    <div id={index} className={message.sender === userData.userId ? styles.messageSentContainer : styles.messageReceivedContainer}>
+                                                    <div key={index} id={index} className={message.sender === userData.userId ? styles.messageSentContainer : styles.messageReceivedContainer}>
                                                         <div className={message.sender === userData.userId ? styles.chatMessageSent : styles.chatMessageReceived}>
                                                             <p className={styles.chatMessageText}>
                                                                 {message.text}
