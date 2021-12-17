@@ -72,7 +72,7 @@ export default function Support() {
                                 <h3 className={"fw-bold ps-4 mb-4"}>Le tue chat</h3>
                                 {userChats.map((chat, index) => {
                                     return (
-                                        <Link href={`#${chat.messages.length - 1}`}>
+                                        <Link key={chat.key} href={`#${chat.messages.length - 1}`}>
                                             <Nav.Item className={styles.navItem} onClick={() => { setCurrentChat({...chat, index: index})}}>
                                                 <Nav.Link className={styles.chatsBox} eventKey={chat.key}>
                                                     <Image src={logo} alt={"Logo consulta giovanile di Lascari"} width={48} height={48} className={styles.chatPicture} />
@@ -91,7 +91,7 @@ export default function Support() {
                             <Tab.Content className={"align-self-end w-100 p-3 overflow-scroll"}>
                                 {userChats.map(chat => {
                                     return (
-                                        <Tab.Pane eventKey={chat.key}>
+                                        <Tab.Pane key={chat.key} eventKey={chat.key}>
                                             {chat.messages.map((message, index) => {
                                                 return (
                                                     <div id={index} className={message.sender === userData.userId ? styles.messageSentContainer : styles.messageReceivedContainer}>
