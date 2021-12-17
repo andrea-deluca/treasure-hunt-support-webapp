@@ -72,7 +72,7 @@ export default function SendNotificationForm() {
                     <Form.Text className={"d-block mb-4"}>Seleziona solo gli utenti a cui vuoi mandare una notifica</Form.Text>
                     {users && users.map(user => {
                         return (
-                            <Form.Check inline type={"checkbox"} label={user.name} value={user.key} name={"users"} />
+                            <Form.Check key={user.key} inline type={"checkbox"} label={user.name} value={user.key} name={"users"} />
                         );
                     })}
                 </Form.Group>

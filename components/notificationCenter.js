@@ -52,7 +52,7 @@ export default function NotificationCenter() {
                     <ul className={"p-0"}>
                         {(notifications && notifications.length !== 0) ? notifications.map(notification => {
                             return (
-                                <li className={"d-flex mb-3"}>
+                                <li key={notification.key} className={"d-flex mb-3"}>
                                     <div className={styles.notificationBox}>
                                         <h6 className={styles.notificationTitle}>{notification.title}</h6>
                                         <p className={styles.notificationText}>{notification.message}</p>

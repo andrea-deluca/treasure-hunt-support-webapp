@@ -6,7 +6,7 @@ function Error(props) {
             <Modal.Header closeButton>
                 <Modal.Title className={"text-danger"}>Oops! Qualcosa è andato storto...</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Mi dispiace... non è stato possibile completare l'operazione.</Modal.Body>
+            <Modal.Body>{`Mi dispiace... non è stato possibile completare l'operazione.`}</Modal.Body>
             <Modal.Body className={"text-danger"}><strong>{props.code}</strong>
                 <br />{props.message}
             </Modal.Body>
@@ -25,7 +25,7 @@ function Success(props) {
             <Modal.Header closeButton>
                 <Modal.Title className={"text-success"}>Yuppy!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>L'operazione è stata eseguita con successo e tutto è andato a buon fine!</Modal.Body>
+            <Modal.Body>{`L'operazione è stata eseguita con successo e tutto è andato a buon fine!`}</Modal.Body>
             <Modal.Footer>
                 <Button variant="success" onClick={props.onHide}>
                     Chiudi

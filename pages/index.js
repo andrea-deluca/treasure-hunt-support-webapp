@@ -27,12 +27,12 @@ function HomeMain() {
       <Row className={"justify-content-center"}>
         <Col xs={{ span: 10 }} lg={{ span: 4 }}>
           <Card className={styles.card}>
-            <Image variant="top" src={map} width={200} height={200} />
+            <Image variant="top" src={map} alt={"Immagine mappa"} width={200} height={200} />
             <Card.Body>
               <Card.Title className={styles.title}>Caccia al tesoro</Card.Title>
               <Card.Text className={styles.text}>
                 Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                the card s content.
               </Card.Text>
               <Button variant={"primary"}>
                 <RiMap2Fill className={"me-2"} />
@@ -46,12 +46,12 @@ function HomeMain() {
         </Col>
         <Col xs={{ span: 10 }} lg={{ span: 4 }}>
           <Card className={styles.card}>
-            <Image variant="top" src={support} width={200} height={200} />
+            <Image variant="top" src={support} alt={"Immagine supporto"} width={200} height={200} />
             <Card.Body>
               <Card.Title className={styles.title}>Supporto</Card.Title>
               <Card.Text className={styles.text}>
                 Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                the card s content.
               </Card.Text>
               <Link href={"/support"}>
                 <Button variant={"dark"}>
