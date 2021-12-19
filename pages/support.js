@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import Layout from "../components/layout";
 import { Row, Col, Form, Button, Tab, Nav } from 'react-bootstrap'
 import logo from '../public/images/logo.png'
@@ -10,6 +11,22 @@ import { database } from "../lib/firebase";
 import { ref, onValue, child, set } from 'firebase/database'
 import { AuthContext } from "../context/AuthContext";
 import AuthRoute from "../components/authRoute";
+
+function SupportHead() {
+    return (
+        <Head>
+            <title>Treasure Hunt | Support Chat</title>
+            <meta name="description" content="Webapp di supporto per la caccia al tesoro organizzata dalla Consulta Giovanile di Lascari" />
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+            <link rel="manifest" href="/site.webmanifest" />
+            <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+            <meta name="msapplication-TileColor" content="#da532c" />
+            <meta name="theme-color" content="#ffffff" />
+        </Head>
+    );
+}
 
 export default function Support() {
     const { userData } = useContext(AuthContext)
@@ -35,7 +52,7 @@ export default function Support() {
             setUserChats(chats)
         })
     }, [])
-    
+
     const sendHandle = (e) => {
         e.preventDefault()
         const message = {
@@ -63,68 +80,71 @@ export default function Support() {
     }
 
     return (
-        <AuthRoute>
-            <Layout navbar>
-                <Tab.Container defaultActiveKey="">
-                    <Row className={"w-100"}>
-                        <Col xs={{ span: 10, offset: 1 }} lg={{ span: 3 }} className={"align-self-start"}>
-                            <Nav variant="pills" className="flex-column">
-                                <h3 className={"fw-bold ps-4 mb-4"}>Le tue chat</h3>
-                                {userChats.map((chat, index) => {
-                                    return (
-                                        <Link key={chat.key} href={`#${chat.messages.length - 1}`}>
-                                            <Nav.Item className={styles.navItem} onClick={() => { setCurrentChat({...chat, index: index})}}>
-                                                <Nav.Link className={styles.chatsBox} eventKey={chat.key}>
-                                                    <Image src={logo} alt={"Logo consulta giovanile di Lascari"} width={48} height={48} className={styles.chatPicture} />
-                                                    <div className={"ms-3"}>
-                                                        <h6 className={styles.chatTitle}>{userData.userType === "admin" ? chat.memberName : chat.name}</h6>
-                                                        <p className={"text-muted m-0"}>{(new Date(chat.messages[chat.messages.length - 1].timestamp)).toLocaleString()}</p>
-                                                    </div>
-                                                </Nav.Link>
-                                            </Nav.Item>
-                                        </Link>
-                                    )
-                                })}
-                            </Nav>
-                        </Col>
-                        <Col xs={{ span: 10, offset: 1 }} lg={{ span: 6, offset: 1 }} className={styles.chatBox}>
-                            <Tab.Content className={"align-self-end w-100 p-3 overflow-scroll"}>
-                                {userChats.map(chat => {
-                                    return (
-                                        <Tab.Pane key={chat.key} eventKey={chat.key}>
-                                            {chat.messages.map((message, index) => {
-                                                return (
-                                                    <div key={index} id={index} className={message.sender === userData.userId ? styles.messageSentContainer : styles.messageReceivedContainer}>
-                                                        <div className={message.sender === userData.userId ? styles.chatMessageSent : styles.chatMessageReceived}>
-                                                            <p className={styles.chatMessageText}>
-                                                                {message.text}
-                                                            </p>
+        <>
+            <SupportHead />
+            <AuthRoute>
+                <Layout navbar>
+                    <Tab.Container defaultActiveKey="">
+                        <Row className={"w-100"}>
+                            <Col xs={{ span: 10, offset: 1 }} lg={{ span: 3 }} className={"align-self-start"}>
+                                <Nav variant="pills" className="flex-column">
+                                    <h3 className={"fw-bold ps-4 mb-4"}>Le tue chat</h3>
+                                    {userChats.map((chat, index) => {
+                                        return (
+                                            <Link key={chat.key} href={`#${chat.messages.length - 1}`}>
+                                                <Nav.Item className={styles.navItem} onClick={() => { setCurrentChat({ ...chat, index: index }) }}>
+                                                    <Nav.Link className={styles.chatsBox} eventKey={chat.key}>
+                                                        <Image src={logo} alt={"Logo consulta giovanile di Lascari"} width={48} height={48} className={styles.chatPicture} />
+                                                        <div className={"ms-3"}>
+                                                            <h6 className={styles.chatTitle}>{userData.userType === "admin" ? chat.memberName : chat.name}</h6>
+                                                            <p className={"text-muted m-0"}>{(new Date(chat.messages[chat.messages.length - 1].timestamp)).toLocaleString()}</p>
                                                         </div>
-                                                    </div>
-                                                )
-                                            })}
-                                        </Tab.Pane>
-                                    )
-                                })}
-                            </Tab.Content>
-                            {currentChat && <Form className={"d-flex mt-5 aling-items-center"} onSubmit={sendHandle}>
-                                <Form.Control
-                                    as="textarea"
-                                    value={newMessage}
-                                    onChange={(e) => setNewMessage(e.target.value)}
-                                    rows={1}
-                                    placeholder={"Scrivi qui..."}
-                                    className={"me-2 p-3"} />
-                                <div>
-                                    <Button variant={"dark"} type={"submit"} className={"p-3"} disabled={!newMessage}>
-                                        <RiSendPlaneFill />
-                                    </Button>
-                                </div>
-                            </Form>}
-                        </Col>
-                    </Row>
-                </Tab.Container>
-            </Layout>
-        </AuthRoute>
+                                                    </Nav.Link>
+                                                </Nav.Item>
+                                            </Link>
+                                        )
+                                    })}
+                                </Nav>
+                            </Col>
+                            <Col xs={{ span: 10, offset: 1 }} lg={{ span: 6, offset: 1 }} className={styles.chatBox}>
+                                <Tab.Content className={"align-self-end w-100 p-3 overflow-scroll"}>
+                                    {userChats.map(chat => {
+                                        return (
+                                            <Tab.Pane key={chat.key} eventKey={chat.key}>
+                                                {chat.messages.map((message, index) => {
+                                                    return (
+                                                        <div key={index} id={index} className={message.sender === userData.userId ? styles.messageSentContainer : styles.messageReceivedContainer}>
+                                                            <div className={message.sender === userData.userId ? styles.chatMessageSent : styles.chatMessageReceived}>
+                                                                <p className={styles.chatMessageText}>
+                                                                    {message.text}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </Tab.Pane>
+                                        )
+                                    })}
+                                </Tab.Content>
+                                {currentChat && <Form className={"d-flex mt-5 aling-items-center"} onSubmit={sendHandle}>
+                                    <Form.Control
+                                        as="textarea"
+                                        value={newMessage}
+                                        onChange={(e) => setNewMessage(e.target.value)}
+                                        rows={1}
+                                        placeholder={"Scrivi qui..."}
+                                        className={"me-2 p-3"} />
+                                    <div>
+                                        <Button variant={"dark"} type={"submit"} className={"p-3"} disabled={!newMessage}>
+                                            <RiSendPlaneFill />
+                                        </Button>
+                                    </div>
+                                </Form>}
+                            </Col>
+                        </Row>
+                    </Tab.Container>
+                </Layout>
+            </AuthRoute>
+        </>
     );
 }
