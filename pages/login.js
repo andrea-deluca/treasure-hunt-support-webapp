@@ -15,19 +15,27 @@ import Loading from '../components/loading';
 
 function LoginHead() {
     return (
-      <Head>
-        <title>Treasure Hunt | Login</title>
-        <meta name="description" content="Webapp di supporto per la caccia al tesoro organizzata dalla Consulta Giovanile di Lascari" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-      </Head>
+        <Head>
+            <title>Treasure Hunt | Login</title>
+            <meta name="description" content="Webapp di supporto per la caccia al tesoro organizzata dalla Consulta Giovanile di Lascari" />
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            
+            
+            <link href="/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image" />
+            <link href="/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" />
+            <link href="/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" />
+            
+            <link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" />
+            <link rel="manifest" href="/site.webmanifest" />
+            <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+            <meta name="msapplication-TileColor" content="#da532c" />
+            <meta name="theme-color" content="#ffffff" />
+        </Head>
     );
-  }
+}
 
 function LoginMain() {
     const router = useRouter()
