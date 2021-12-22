@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import Link from 'next/link'
 import Image from 'next/image';
 import { Container, Navbar, Offcanvas } from 'react-bootstrap'
-import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine, RiCustomerService2Fill, RiTerminalBoxFill, RiNotification3Line } from 'react-icons/ri'
+import { RiMenu3Fill, RiHome3Fill, RiMap2Fill, RiLoginCircleLine, RiCustomerService2Fill, RiTerminalBoxFill} from 'react-icons/ri'
 import styles from '../styles/navbar.module.css'
 import logo from '../public/images/logo.png'
 import { signOut } from 'firebase/auth';
@@ -82,7 +82,7 @@ export default function Nav() {
                                 width="40"
                                 height="40"
                                 className="d-inline-block align-top"
-                                alt="React Bootstrap logo"
+                                alt="Logo Consulta Giovanile Lascari"
                             />
                         </Link>
                     </Navbar.Brand>

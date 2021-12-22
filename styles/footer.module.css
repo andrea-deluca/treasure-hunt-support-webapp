@@ -8,10 +8,3 @@
     align-items: center;
     background-color: rgb(248, 249, 250);
 }
-
-.footer a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-}

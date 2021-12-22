@@ -10,7 +10,8 @@ export default async function handler(req, res) {
         const updates = {}
         updates[`users/${user.uid}/`] = {
             name: data.name,
-            type: "user"
+            type: "user",
+            email: data.email
         }
         updates[`chats/${chat}`] = {
             name: "Supporto della Consulta",
