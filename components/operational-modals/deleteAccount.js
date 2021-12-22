@@ -37,7 +37,7 @@ export default function DeleteAccountModal(props) {
     return (
         <Modal centered show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Sei sicuro di voler eliminare l'account?</Modal.Title>
+                <Modal.Title>{"Sei sicuro di voler eliminare l'account?"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {response.show ?
